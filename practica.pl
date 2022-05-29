@@ -43,7 +43,7 @@ creuats():-
     paraula(H6),length(H6,7),
     nth0(2,H6,C10),nth0(5,V5,C10),
 
-    nth0(5,H6,C11),nth0(10,V6,C11),
+    nth0(4,H6,C11),nth0(10,V6,C11),
 
     paraula(V7),length(V7,3),
     nth0(6,H6,C12),nth0(2,V7,C12),
