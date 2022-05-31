@@ -11,7 +11,7 @@ repetides([_|R]):-repetides(R).
 
 mostra([],_,_,_).
 mostra([L|R],X,Y,horitzontal):-gotoXY(X,Y),escriu(L,blau),Y1 is Y+3,mostra(R,X,Y1,horitzontal).
-mostra([L|R],X,Y,vertical):-gotoXY(X,Y),escriu(L,vermell),X1 is X+3,mostra(R,X1,Y,vertical).
+mostra([L|R],X,Y,vertical):-gotoXY(X,Y),escriu(L,vermell),X1 is X+1,mostra(R,X1,Y,vertical).
 
 creuats():-
     paraula(H1),length(H1,7),paraula(V6),length(V6,11),
@@ -51,6 +51,23 @@ creuats():-
     paraula(H7),length(H7,10),
     nth0(5,H7,C13),nth0(7,V5,C13),
 
-    write([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7])
+    \+repetides([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7]),
+
+    %write([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7]),
+
+    mostra(H1,1,22,horitzontal),
+    mostra(H2,3,28,horitzontal),
+    mostra(H3,4,1,horitzontal),
+    mostra(H4,6,7,horitzontal),
+    mostra(H5,11,4,horitzontal),
+    mostra(H6,11,22,horitzontal),
+    mostra(H7,13,13,horitzontal),
+    mostra(V1,4,1,vertical),
+    mostra(V2,6,7,vertical),
+    mostra(V3,2,16,vertical),
+    mostra(V4,3,22,vertical),
+    mostra(V5,6,28,vertical),
+    mostra(V6,1,34,vertical),
+    mostra(V7,9,40,vertical),nl,nl,nl
 .    
 
