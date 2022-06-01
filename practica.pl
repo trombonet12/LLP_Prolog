@@ -15,6 +15,7 @@ mostra([L|R],X,Y,horitzontal):-gotoXY(X,Y),escriu(L,blau),Y1 is Y+3,mostra(R,X,Y
 mostra([L|R],X,Y,vertical):-gotoXY(X,Y),escriu(L,vermell),X1 is X+1,mostra(R,X1,Y,vertical).
 
 creuats():-
+    cls,
     paraula(H1),length(H1,7),paraula(V6),length(V6,11),
     nth0(4,H1,C1),nth0(0,V6,C1),
 
@@ -73,6 +74,7 @@ creuats():-
 .
 
 creuats2():-
+    cls,
     paraula(_,_,H1L,_,_,_,_,_,_,_,_,_,_,_,_),atom_chars(H1L,H1),length(H1,7),paraula(_,_,V6L,_,_,_,_,_,_,_,_,_,_,_,_),atom_chars(V6L,V6),length(V6,11),
     nth0(4,H1,C1),nth0(0,V6,C1),
 
