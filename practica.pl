@@ -1,21 +1,40 @@
 % AUTORS: Joan López, Marc Melia, Miquel Vidal.
+
+% Importam els fitxers auxiliars
 :-consult(auxiliar).
 :-consult(diccionari).
 
+% Definim el conjunt de paraules de la practica. Tant cap endevant com per enderrera y a una llista lletra a lletra.
 paraula(X):-member(Y,[democracia, encontrarse, emboscar, abordaje, convexo, evadirse, elevarse, escuela, cuerpo, jugar, juicio, error, vicio, rea]),atom_chars(Y,X).
 paraula(X):-member(Y,[democracia, encontrarse, emboscar, abordaje, convexo, evadirse, elevarse, escuela, cuerpo, jugar, juicio, error, vicio, rea]),atom_chars(Y,Z),reverse(Z,X).
 
+% Funció que ens retorna si hi ha elements repetits en una llista.
+% Si la llista es buida, retorna false.
 repetides([_|[]]):-fail.
+% Si la llista no es buida, comprova si el primer element de la llista está una altra vegada a la llista.
 repetides([E1|R]):-member(E1,R).
+% Si la llista no es buida, comprova si el primer element de la llista está una altra vegada a la llista al enreves.
 repetides([E1|R]):-reverse(E1,E2),member(E2,R).
+% Com el primer element no está repetit a la llista, envia la resta de la llista a la funció per fer la recursivitat.
 repetides([_|R]):-repetides(R).
 
+% Funció que ens mostra graficament un element en base a unes coordenades y una orientació.
+% Cas base.
 mostra([],_,_,_).
+% Cas d·orientació horitzontal.
 mostra([L|R],X,Y,horitzontal):-gotoXY(X,Y),escriu(L,blau),Y1 is Y+3,mostra(R,X,Y1,horitzontal).
+% Cas d·orientació vertical.
 mostra([L|R],X,Y,vertical):-gotoXY(X,Y),escriu(L,vermell),X1 is X+1,mostra(R,X1,Y,vertical).
 
+% Funció auxiliar per creuats2 per la reducció de codi.
 paraula2(X):-paraula(_,_,Y,_,_,_,_,_,_,_,_,_,_,_,_),atom_chars(Y,X).
 
+% Funció principal del programa.
+% Primer de tot borra la pantalla per evitar que hi hagi res escrit per pantalla.
+% Després, va aplicant les funcións paraula() i length() per sebre quines paraules poden encaixar en cada posició del mot creuats.
+% Això es fa per cada posició del mot creuats a mesura que els va necesitant per les diferents colisions entre paraules verticals i horitzontals.
+% Després es comprova que la solució no conté paraules repetides, aixo ho feim negant la funció repetides().
+% Una vegada ja es te una solució, la mostra per pantalla amb la funció mostra() a la posició corresponent.
 creuats():-
     cls,
     paraula(H1),length(H1,7),paraula(V6),length(V6,11),
@@ -57,7 +76,7 @@ creuats():-
 
     \+repetides([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7]),
 
-    %write([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7]),
+    %write([H1,H2,H3,H4,H5,H6,H7,V1,V2,V3,V4,V5,V6,V7]), % Per fer debuging.
 
     mostra(H1,1,22,horitzontal),
     mostra(H2,3,28,horitzontal),
@@ -75,6 +94,8 @@ creuats():-
     mostra(V7,9,40,vertical),nl,nl,nl
 .
 
+% Funció extra del programa.
+% Es basa en creuats() pero canviant paraula() per paraula2() per incloure el diccionari de paraules.
 creuats2():-
     cls,
     paraula2(H1),length(H1,7),paraula2(V6),length(V6,11),
